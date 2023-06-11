@@ -7,11 +7,13 @@ class Data():
         self.y = slope * x + scalar
         self.data = np.column_stack((self.x,self.y))
 
+    # Method to get the final distorted data
     def generate_random_points(self):
         self.add_noise()
         self.add_faulty()
         self.x, self.y = self.data[:,0], self.data[:,1]
-
+        
+    # Method to apply noise with different gains to some prime intervals of the data
     def add_noise(self):
         data_noise = np.random.normal(size=self.data.shape)
 
@@ -21,6 +23,7 @@ class Data():
         self.data[::11] += 87 * data_noise[::11] 
         self.x, self.y = self.data[:,0], self.data[:,1]
 
+    # Method to swap out some measurements with faulty ones
     def add_faulty(self):
         data_faulty = np.random.normal(size=(round(0.25*self.data.shape[0]), 2))
         self.data[::4] += 34 * data_faulty
