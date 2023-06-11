@@ -23,7 +23,7 @@ class RansacSolver:
           np.random.shuffle(data.data)
           sample = data.data[:sample_num, :]
 
-          self.model.estimate(data.data)
+          self.model.estimate(sample)
 
           y_model = self.model.predict_y(data.x)
           error = np.abs(data.y - y_model.T)
